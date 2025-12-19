@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import myLogo from "../assets/myLogo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,11 +34,13 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <a href="#home" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
-              <span className="text-white font-bold text-lg">D</span>
-            </div>
+            <img
+              src={myLogo}
+              alt="logo"
+              className="w-10 h-10 rounded-full object-cover transition-all duration-300 ease-in-out group-hover:w-20 group-hover:h-20"
+            />
             <span className="text-2xl font-bold">
-              <span className="text-white">Dinushka</span>
+              <span className="text-white">DinushkaTharidu</span>
               <span className="text-[#6366f1]">.dev</span>
             </span>
           </a>

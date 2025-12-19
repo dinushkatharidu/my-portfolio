@@ -16,7 +16,7 @@ const Education = () => {
       <div className="absolute left-0 top-1/4 w-72 h-72 bg-[#6366f1]/10 rounded-full blur-3xl"></div>
       <div className="absolute right-0 bottom-1/4 w-72 h-72 bg-[#8b5cf6]/10 rounded-full blur-3xl"></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm: px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
           <span className="text-[#6366f1] font-medium text-sm uppercase tracking-widest">
@@ -55,7 +55,7 @@ const Education = () => {
                   >
                     <div
                       className={`flex items-center gap-3 mb-4 ${
-                        index % 2 === 0 ? "md:flex-row-reverse" : ""
+                        index % 2 === 0 ? "md: flex-row-reverse" : ""
                       }`}
                     >
                       <span className="text-4xl">{item.icon}</span>
@@ -64,6 +64,16 @@ const Education = () => {
                           {item.degree}
                         </h3>
                         <p className="text-[#6366f1]">{item.institution}</p>
+                        {"certification" in item && item.certification && (
+                          <p className="text-gray-400 text-sm">
+                            ({item.certification})
+                          </p>
+                        )}
+                        {"location" in item && item.location && (
+                          <p className="text-gray-400 text-sm">
+                            {item.location}
+                          </p>
+                        )}
                       </div>
                     </div>
                     <div
