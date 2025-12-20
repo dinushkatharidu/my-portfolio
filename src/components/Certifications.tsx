@@ -1,8 +1,6 @@
 import { certifications } from "../data/portfolioData";
 import {
   HiOutlineBadgeCheck,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  HiOutlineExternalLink,
   HiOutlineShieldCheck,
 } from "react-icons/hi";
 
