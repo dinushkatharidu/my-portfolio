@@ -1,147 +1,121 @@
 import { certifications } from "../data/portfolioData";
+import {
+  HiOutlineBadgeCheck,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  HiOutlineExternalLink,
+  HiOutlineShieldCheck,
+} from "react-icons/hi";
 
 const Certifications = () => {
   return (
-    <section className="py-24 bg-[#0a0a0f] relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
-            backgroundSize: "50px 50px",
-          }}
-        ></div>
-      </div>
+    <section
+      id="certifications"
+      className="py-24 bg-[#0a0a0f] relative overflow-hidden"
+    >
+      {/* Ambient Background Glows */}
+      <div className="absolute top-1/4 -left-20 w-80 h-80 bg-[#6366f1]/10 rounded-full blur-[120px] animate-pulse"></div>
+      <div
+        className="absolute bottom-1/4 -right-20 w-80 h-80 bg-[#8b5cf6]/10 rounded-full blur-[120px] animate-pulse"
+        style={{ animationDelay: "2s" }}
+      ></div>
+
+      {/* Background Dot Pattern */}
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+          backgroundSize: "40px 40px",
+        }}
+      ></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <span className="text-[#6366f1] font-medium text-sm uppercase tracking-widest">
-            Credentials
+        <div className="text-center mb-20 space-y-4">
+          <span className="text-[#6366f1] font-semibold text-sm uppercase tracking-[0.3em] bg-[#6366f1]/10 px-4 py-1.5 rounded-full border border-[#6366f1]/20">
+            Professional
           </span>
-          <h2 className="text-4xl md: text-5xl font-bold text-white mt-2">
-            <span className="text-gradient">Certifications</span>
+          <h2 className="text-4xl md:text-6xl font-bold text-white mt-2">
+            My{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6366f1] to-[#a855f7]">
+              Certifications
+            </span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] mx-auto mt-4 rounded-full"></div>
+          <div className="w-24 h-1.5 bg-gradient-to-r from-[#6366f1] to-[#a855f7] mx-auto mt-6 rounded-full"></div>
         </div>
 
-        {/* Tier 1 - Must-Have */}
-        <div className="mb-16">
-          <div className="flex items-center gap-3 mb-8">
-            <span className="text-3xl">🥇</span>
-            <h3 className="text-2xl font-bold text-white">
-              Must-Have Certifications
-            </h3>
-            <div className="flex-1 h-px bg-gradient-to-r from-yellow-500/50 to-transparent"></div>
-          </div>
+        {/* Unified Certifications Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Priority (Tier 1) Certifications - Featured Style */}
+          {certifications.tier1.map((cert, index) => (
+            <div
+              key={`tier1-${index}`}
+              className="group relative p-8 rounded-3xl border border-white/10 bg-[#12121a]/50 backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-[#6366f1]/50 shadow-xl"
+            >
+              {/* Premium Glow for Tier 1 */}
+              <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#6366f1]/10 rounded-full blur-3xl group-hover:bg-[#6366f1]/20 transition-all duration-500"></div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {certifications.tier1.map((cert, index) => (
-              <div
-                key={index}
-                className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-yellow-500/10 via-orange-500/5 to-transparent border border-yellow-500/20 p-6 hover: border-yellow-400/50 transition-all duration-500 card-hover"
-              >
-                {/* Glow Effect */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-500/10 rounded-full blur-3xl group-hover:bg-yellow-500/20 transition-all duration-500"></div>
-
-                <div className="relative z-10">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
-                      <svg
-                        className="w-6 h-6 text-white"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 12l2 2 4-4M7. 835 4.697a3. 42 3.42 0 001.946-. 806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00. 806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-. 806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-. 806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-. 806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-                        />
-                      </svg>
+              <div className="relative z-10 flex flex-col h-full justify-between">
+                <div>
+                  <div className="flex items-start justify-between mb-6">
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#6366f1] to-[#a855f7] flex items-center justify-center text-3xl text-white shadow-lg shadow-[#6366f1]/20">
+                      <HiOutlineBadgeCheck />
                     </div>
                     {cert.date && (
-                      <span className="px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-xs font-medium">
+                      <span className="px-3 py-1 bg-[#6366f1]/10 text-[#6366f1] border border-[#6366f1]/20 rounded-full text-[10px] font-bold uppercase tracking-widest">
                         {cert.date}
                       </span>
                     )}
                   </div>
-                  <h4 className="text-lg font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors">
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#6366f1] transition-colors leading-tight">
                     {cert.name}
-                  </h4>
-                  <p className="text-gray-400 text-sm flex items-center gap-2">
-                    <span className="w-1. 5 h-1.5 bg-yellow-400 rounded-full"></span>
+                  </h3>
+                  <p className="text-gray-400 text-sm font-medium flex items-center gap-2 mb-6">
+                    <span className="w-1.5 h-1.5 bg-[#6366f1] rounded-full animate-pulse"></span>
                     {cert.issuer}
                   </p>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
+            </div>
+          ))}
 
-        {/* Tier 2 - Supporting */}
-        <div>
-          <div className="flex items-center gap-3 mb-8">
-            <span className="text-3xl">🥈</span>
-            <h3 className="text-2xl font-bold text-white">
-              Supporting Certifications
-            </h3>
-            <div className="flex-1 h-px bg-gradient-to-r from-gray-500/50 to-transparent"></div>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {certifications.tier2.map((cert, index) => (
-              <div
-                key={index}
-                className="group glass rounded-xl p-5 hover:bg-white/5 transition-all duration-300 card-hover border border-white/5 hover:border-[#6366f1]/30"
-              >
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#6366f1]/20 to-[#8b5cf6]/20 flex items-center justify-center">
-                    <svg
-                      className="w-5 h-5 text-[#6366f1]"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <h4 className="text-white font-semibold text-sm mb-1 group-hover:text-[#6366f1] transition-colors">
-                  {cert.name}
-                </h4>
-                <p className="text-gray-500 text-xs">{cert.issuer}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Verification Badge */}
-        <div className="mt-16 text-center">
-          <div className="inline-flex items-center gap-3 px-6 py-3 glass rounded-full">
-            <svg
-              className="w-5 h-5 text-green-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          {/* Supporting (Tier 2) Certifications - Clean Glass Style */}
+          {certifications.tier2.map((cert, index) => (
+            <div
+              key={`tier2-${index}`}
+              className="group relative p-6 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-md transition-all duration-500 hover:bg-white/10 hover:border-white/20 hover:-translate-y-1"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 12l2 2 4-4m5. 618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-. 382-3.016z"
-              />
-            </svg>
-            <span className="text-gray-300">
-              All certifications are verified and up-to-date
-            </span>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-2xl text-gray-400 group-hover:text-[#6366f1] transition-colors">
+                  <HiOutlineBadgeCheck />
+                </div>
+                <div>
+                  <h4 className="text-white font-bold text-sm mb-1 group-hover:text-white transition-colors leading-snug">
+                    {cert.name}
+                  </h4>
+                  <p className="text-gray-500 text-xs font-medium">
+                    {cert.issuer}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Trust Footer / Verification Badge */}
+        <div className="mt-20 flex justify-center">
+          <div className="inline-flex items-center gap-4 px-8 py-4 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm group hover:border-green-500/30 transition-all duration-500">
+            <div className="relative">
+              <HiOutlineShieldCheck className="text-3xl text-green-400 group-hover:scale-110 transition-transform" />
+              <div className="absolute inset-0 bg-green-400/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </div>
+            <div className="text-left">
+              <p className="text-white font-bold text-sm tracking-wide">
+                Authenticity Verified
+              </p>
+              <p className="text-gray-500 text-xs">
+                All credentials are current and validated via primary issuers.
+              </p>
+            </div>
           </div>
         </div>
       </div>

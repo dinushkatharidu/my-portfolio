@@ -1,3 +1,10 @@
+import {
+  FaGraduationCap,
+  FaLaptopCode,
+  FaBook,
+  FaSchool,
+} from "react-icons/fa";
+
 export const personalInfo = {
   name: "Dinushka Tharidu",
   title: "Intern Software Engineer",
@@ -152,7 +159,7 @@ export const education = [
     location: "Colombo",
     period: "11/2023 – Present",
     status: "In Progress",
-    icon: "🎓",
+    icon: FaGraduationCap ,
     color: "primary",
   },
   {
@@ -161,7 +168,7 @@ export const education = [
     certification: "Pearson Assured",
     period: "03/2023 – 03/2024",
     status: "Completed",
-    icon: "💻",
+    icon: FaLaptopCode ,
     color: "secondary",
   },
   {
@@ -169,8 +176,16 @@ export const education = [
     institution: "ESOFT Metro Campus",
     period: "03/2023 – 03/2024",
     status: "Completed",
-    icon: "📚",
+    icon: FaBook ,
     color: "accent",
+  },
+  {
+    degree: "GCE Advanced Level – Mathematical Stream",
+    institution: "Rahula National School, Godakawela",
+    period: "2022 – 2023",
+    status: "Completed",
+    icon: FaSchool ,
+    color: "green",
   },
 ];
 

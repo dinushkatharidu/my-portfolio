@@ -186,7 +186,7 @@ const Skills = () => {
             <div className="bg-[#0a0a0f] rounded-3xl px-10 py-12 border border-white/5">
               <h3 className="text-2xl font-bold text-white mb-8 flex items-center justify-center gap-3">
                 <span className="w-10 h-[1px] bg-gradient-to-r from-transparent to-[#6366f1]"></span>
-                Human Skills
+                Soft Skills
                 <span className="w-10 h-[1px] bg-gradient-to-l from-transparent to-[#6366f1]"></span>
               </h3>
               <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">

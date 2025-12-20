@@ -61,7 +61,7 @@ const Navbar = () => {
               href="#contact"
               className="ml-4 px-6 py-2.5 bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] text-white rounded-full font-medium hover:shadow-lg hover:shadow-[#6366f1]/30 transform hover:scale-105 transition-all duration-300"
             >
-              Hire Me
+              Get in Touch
             </a>
           </div>
 

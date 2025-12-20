@@ -1,5 +1,9 @@
 import { useState } from "react";
 import { personalInfo } from "../data/portfolioData";
+import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
+import { SiGmail } from "react-icons/si";
+import { HiOutlineLocationMarker, HiOutlineArrowRight } from "react-icons/hi";
+import { FiPhone, FiCheckCircle } from "react-icons/fi";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -8,7 +12,63 @@ const Contact = () => {
     subject: "",
     message: "",
   });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSent, setIsSent] = useState(false);
+
+  const socialLinks = [
+    {
+      name: "GitHub",
+      icon: FaGithub,
+      href: personalInfo.github,
+      hoverClass:
+        "hover:text-white hover:border-white/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]",
+    },
+    {
+      name: "LinkedIn",
+      icon: FaLinkedin,
+      href: personalInfo.linkedin,
+      hoverClass:
+        "hover:text-[#0077b5] hover:border-[#0077b5]/40 hover:shadow-[0_0_20px_rgba(0,119,181,0.2)]",
+    },
+  ];
+
+  const contactInfo = [
+    {
+      icon: SiGmail,
+      label: "Email",
+      value: personalInfo.email,
+      href: `mailto:${personalInfo.email}`,
+      color: "from-[#EA4335]/20 to-[#EA4335]/5",
+      iconColor: "text-[#EA4335]",
+    },
+    {
+      icon: FiPhone,
+      label: "Phone",
+      value: personalInfo.phone,
+      href: `tel:${personalInfo.phone.replace(/\s/g, "")}`,
+      color: "from-[#10b981]/20 to-[#10b981]/5",
+      iconColor: "text-[#10b981]",
+    },
+    {
+      icon: FaWhatsapp,
+      label: "WhatsApp",
+      value: personalInfo.whatsapp,
+      href: `https://wa.me/${personalInfo.whatsapp
+        .replace(/\s/g, "")
+        .replace("+", "")}`,
+      color: "from-[#25D366]/20 to-[#25D366]/5",
+      iconColor: "text-[#25D366]",
+    },
+    {
+      icon: HiOutlineLocationMarker,
+      label: "Location",
+      value: "Kahawatta, Sri Lanka",
+      href: "#",
+      color: "from-[#3b82f6]/20 to-[#3b82f6]/5",
+      iconColor: "text-[#3b82f6]",
+    },
+  ];
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -19,113 +79,36 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    // Simulation of form submission
     setTimeout(() => {
       setIsSubmitting(false);
-      alert("Message sent successfully!");
+      setIsSent(true);
       setFormData({ name: "", email: "", subject: "", message: "" });
-    }, 1500);
+      // Clear success state after 6 seconds
+      setTimeout(() => setIsSent(false), 6000);
+    }, 2000);
   };
-
-  const contactInfo = [
-    {
-      icon: (
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-          />
-        </svg>
-      ),
-      label: "Email",
-      value: personalInfo.email,
-      href: `mailto:${personalInfo.email}`,
-      color: "from-red-500 to-orange-500",
-    },
-    {
-      icon: (
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-. 502l4.493 1.498a1 1 0 01.684. 949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-          />
-        </svg>
-      ),
-      label: "Phone",
-      value: personalInfo.phone,
-      href: `tel:${personalInfo.phone.replace(/\s/g, "")}`,
-      color: "from-green-500 to-emerald-500",
-    },
-    {
-      icon: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M17. 472 14.382c-. 297-. 149-1.758-.867-2.03-.967-. 273-.099-. 471-.148-.67. 15-.197.297-.767.966-. 94 1.164-. 173. 199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-. 025-.52-.075-.149-.669-1.612-. 916-2.207-.242-.579-.487-. 5-.669-.51-.173-.008-.371-. 01-.57-. 01-.198 0-.52.074-.792.372-. 272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712. 227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413. 248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-. 004a9.87 9.87 0 01-5.031-1.378l-.361-. 214-3.741. 982. 998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c. 001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-. 003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 . 16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L. 057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-        </svg>
-      ),
-      label: "WhatsApp",
-      value: personalInfo.whatsapp,
-      href: `https://wa.me/${personalInfo.whatsapp
-        .replace(/\s/g, "")
-        .replace("+", "")}`,
-      color: "from-green-400 to-green-600",
-    },
-    {
-      icon: (
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M17. 657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-          />
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-          />
-        </svg>
-      ),
-      label: "Location",
-      value: "Kahawatta, Sri Lanka",
-      href: "#",
-      color: "from-blue-500 to-cyan-500",
-    },
-  ];
 
   return (
     <section
       id="contact"
-      className="py-24 bg-[#12121a] relative overflow-hidden"
+      className="py-24 bg-[#0a0a0f] relative overflow-hidden"
     >
-      <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-[#6366f1]/5 to-transparent"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#8b5cf6]/10 rounded-full blur-3xl"></div>
+      {/* Background Gradients */}
+      <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-[#6366f1]/5 to-transparent pointer-events-none"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#8b5cf6]/5 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section Header */}
         <div className="text-center mb-16">
           <span className="text-[#6366f1] font-medium text-sm uppercase tracking-widest">
             Let's Connect
           </span>
           <h2 className="text-4xl md:text-5xl font-bold text-white mt-2">
-            Get In <span className="text-gradient">Touch</span>
+            Get In{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6366f1] to-[#a855f7]">
+              Touch
+            </span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] mx-auto mt-4 rounded-full"></div>
           <p className="text-gray-400 mt-6 max-w-2xl mx-auto">
@@ -135,196 +118,183 @@ const Contact = () => {
         </div>
 
         <div className="grid lg:grid-cols-5 gap-12">
-          {/* Contact Info */}
-          <div className="lg: col-span-2 space-y-6">
-            {contactInfo.map((info, index) => (
-              <a
-                key={index}
-                href={info.href}
-                target={info.href.startsWith("http") ? "_blank" : undefined}
-                rel={
-                  info.href.startsWith("http")
-                    ? "noopener noreferrer"
-                    : undefined
-                }
-                className="group flex items-center gap-4 p-4 glass rounded-xl hover:bg-white/5 transition-all duration-300"
-              >
-                <div
-                  className={`w-14 h-14 rounded-xl bg-gradient-to-br ${info.color} flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300`}
+          {/* Left Side: Contact Info & Socials */}
+          <div className="lg:col-span-2 space-y-6">
+            {contactInfo.map((info, index) => {
+              const Icon = info.icon;
+              return (
+                <a
+                  key={index}
+                  href={info.href}
+                  className="group flex items-center gap-4 p-4 glass rounded-xl hover:bg-white/5 transition-all duration-300 border border-white/5 hover:border-white/10"
                 >
-                  {info.icon}
-                </div>
-                <div>
-                  <p className="text-gray-400 text-sm">{info.label}</p>
-                  <p className="text-white font-medium group-hover:text-[#6366f1] transition-colors">
-                    {info.value}
-                  </p>
-                </div>
-              </a>
-            ))}
+                  <div
+                    className={`w-14 h-14 rounded-xl bg-gradient-to-br ${info.color} flex items-center justify-center text-2xl ${info.iconColor} group-hover:scale-110 transition-transform duration-300 shadow-lg`}
+                  >
+                    <Icon />
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm font-medium">
+                      {info.label}
+                    </p>
+                    <p className="text-white font-bold group-hover:text-[#6366f1] transition-colors uppercase tracking-tight">
+                      {info.value}
+                    </p>
+                  </div>
+                </a>
+              );
+            })}
 
             {/* Social Links */}
-            <div className="pt-4">
-              <h3 className="text-white font-semibold mb-4">Follow Me</h3>
-              <div className="flex gap-3">
-                <a
-                  href={personalInfo.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-12 h-12 glass rounded-xl flex items-center justify-center text-gray-400 hover: text-white hover:bg-gray-700 transition-all duration-300 hover:scale-110"
-                >
-                  <svg
-                    className="w-6 h-6"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385. 6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015. 555-3.795-. 735-4.035-1.41-. 135-.345-.72-1.41-1.23-1.695-.42-. 225-1.02-. 78-. 015-. 795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-. 78.42-1.305.765-1.605-2.67-. 3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-. 12-.3-.54-1.53. 12-3.18 0 0 1.005-. 315 3.3 1.23.96-.27 1.98-.405 3-. 405s2.04.135 3 . 405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                  </svg>
-                </a>
-                <a
-                  href={personalInfo.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-12 h-12 glass rounded-xl flex items-center justify-center text-gray-400 hover:text-[#0077b5] hover:bg-[#0077b5]/10 transition-all duration-300 hover:scale-110"
-                >
-                  <svg
-                    className="w-6 h-6"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h. 046c.477-. 9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-. 926-2.063-2.065 0-1.138. 92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 . 774 23.2 0 22.222 0h. 003z" />
-                  </svg>
-                </a>
+            <div className="pt-8">
+              <h3 className="text-white font-bold text-lg mb-6 flex items-center gap-3">
+                <span className="w-8 h-[2px] bg-[#6366f1] rounded-full"></span>
+                Connect With Me
+              </h3>
+              <div className="flex gap-5">
+                {socialLinks.map((social, index) => {
+                  const SocialIcon = social.icon;
+                  return (
+                    <a
+                      key={index}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`group relative w-14 h-14 flex items-center justify-center bg-white/5 border border-white/10 rounded-2xl text-gray-400 text-2xl transition-all duration-300 hover:-translate-y-2 ${social.hoverClass}`}
+                    >
+                      <SocialIcon />
+                    </a>
+                  );
+                })}
               </div>
             </div>
 
             {/* Availability Badge */}
-            <div className="p-6 bg-gradient-to-br from-green-500/10 to-emerald-500/5 border border-green-500/20 rounded-2xl">
+            <div className="p-6 bg-gradient-to-br from-green-500/10 to-emerald-500/5 border border-green-500/20 rounded-2xl mt-4">
               <div className="flex items-center gap-3 mb-3">
                 <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
-                <span className="text-green-400 font-semibold">
+                <span className="text-green-400 font-bold uppercase tracking-widest text-xs">
                   Open to Opportunities
                 </span>
               </div>
-              <p className="text-gray-400 text-sm">
-                Actively seeking internship or entry-level software engineering
-                roles. Let's discuss how I can contribute to your team!
+              <p className="text-gray-400 text-sm leading-relaxed">
+                Currently looking for internship or entry-level software
+                engineering roles. Let's discuss potential collaborations!
               </p>
             </div>
           </div>
 
-          {/* Contact Form */}
+          {/* Right Column: Professional Contact Form */}
           <div className="lg:col-span-3">
-            <form
-              onSubmit={handleSubmit}
-              className="glass rounded-2xl p-8 space-y-6"
-            >
-              <div className="grid sm:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-gray-400 text-sm mb-2">
-                    Your Name
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-[#0a0a0f] border border-white/10 rounded-xl text-white placeholder-gray-500 focus: border-[#6366f1] focus:ring-1 focus:ring-[#6366f1] focus:outline-none transition-all duration-300"
-                    placeholder="John Doe"
-                  />
-                </div>
-                <div>
-                  <label className="block text-gray-400 text-sm mb-2">
-                    Your Email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-[#0a0a0f] border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-[#6366f1] focus:ring-1 focus: ring-[#6366f1] focus:outline-none transition-all duration-300"
-                    placeholder="john@example. com"
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="block text-gray-400 text-sm mb-2">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-[#0a0a0f] border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-[#6366f1] focus:ring-1 focus:ring-[#6366f1] focus:outline-none transition-all duration-300"
-                  placeholder="Internship Opportunity"
-                />
-              </div>
-              <div>
-                <label className="block text-gray-400 text-sm mb-2">
-                  Message
-                </label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={5}
-                  className="w-full px-4 py-3 bg-[#0a0a0f] border border-white/10 rounded-xl text-white placeholder-gray-500 focus: border-[#6366f1] focus:ring-1 focus:ring-[#6366f1] focus:outline-none transition-all duration-300 resize-none"
-                  placeholder="Hi Dinushka, I'd like to discuss..."
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full py-4 bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] text-white rounded-xl font-semibold hover:shadow-2xl hover: shadow-[#6366f1]/30 transition-all duration-300 hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-              >
-                {isSubmitting ? (
-                  <>
-                    <svg
-                      className="w-5 h-5 animate-spin"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      ></circle>
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      ></path>
-                    </svg>
-                    Sending...
-                  </>
+            <div className="relative group h-full">
+              {/* Ambient Glow behind the tile */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-[#6366f1] to-[#a855f7] rounded-[2rem] blur opacity-10 group-hover:opacity-20 transition duration-1000"></div>
+
+              <div className="relative h-full glass rounded-[2.5rem] p-8 md:p-12 border border-white/10 bg-[#12121a]/70 backdrop-blur-2xl shadow-2xl overflow-hidden">
+                {isSent ? (
+                  <div className="h-full flex flex-col items-center justify-center text-center space-y-6 animate-fadeIn">
+                    <div className="w-20 h-20 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-5xl text-emerald-500">
+                      <FiCheckCircle />
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="text-2xl font-bold text-white tracking-tight">
+                        Message Received!
+                      </h3>
+                      <p className="text-gray-400">
+                        Thanks for reaching out, Dinushka. I'll get back to you
+                        shortly.
+                      </p>
+                    </div>
+                  </div>
                 ) : (
-                  <>
-                    Send Message
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  <form onSubmit={handleSubmit} className="space-y-8">
+                    <div className="grid md:grid-cols-2 gap-8">
+                      {/* Name Input */}
+                      <div className="space-y-3">
+                        <label className="text-gray-400 text-xs font-bold uppercase tracking-widest ml-1">
+                          Full Name
+                        </label>
+                        <input
+                          type="text"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          required
+                          className="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-gray-500 focus:bg-white/10 focus:border-[#6366f1]/50 focus:ring-2 focus:ring-[#6366f1]/10 outline-none transition-all duration-300"
+                          placeholder="Your Name"
+                        />
+                      </div>
+
+                      {/* Email Input */}
+                      <div className="space-y-3">
+                        <label className="text-gray-400 text-xs font-bold uppercase tracking-widest ml-1">
+                          Email Address
+                        </label>
+                        <input
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          required
+                          className="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-gray-500 focus:bg-white/10 focus:border-[#6366f1]/50 focus:ring-2 focus:ring-[#6366f1]/10 outline-none transition-all duration-300"
+                          placeholder="yourname@example.com"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Subject Input */}
+                    <div className="space-y-3">
+                      <label className="text-gray-400 text-xs font-bold uppercase tracking-widest ml-1">
+                        Subject
+                      </label>
+                      <input
+                        type="text"
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-gray-500 focus:bg-white/10 focus:border-[#6366f1]/50 focus:ring-2 focus:ring-[#6366f1]/10 outline-none transition-all duration-300"
+                        placeholder="Project Proposal / Inquiry"
                       />
-                    </svg>
-                  </>
+                    </div>
+
+                    {/* Message Textarea */}
+                    <div className="space-y-3">
+                      <label className="text-gray-400 text-xs font-bold uppercase tracking-widest ml-1">
+                        Message
+                      </label>
+                      <textarea
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        required
+                        rows={6}
+                        className="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-gray-500 focus:bg-white/10 focus:border-[#6366f1]/50 focus:ring-2 focus:ring-[#6366f1]/10 outline-none transition-all duration-300 resize-none"
+                        placeholder="Briefly describe your project or inquiry..."
+                      ></textarea>
+                    </div>
+
+                    {/* Purple Action Button */}
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="group relative w-full py-5 bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] text-white rounded-2xl font-bold text-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(99,102,241,0.4)] hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50"
+                    >
+                      <span className="relative z-10 flex items-center justify-center gap-3">
+                        {isSubmitting ? (
+                          <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                        ) : (
+                          <>
+                            Send Message
+                            <HiOutlineArrowRight className="group-hover:translate-x-1 transition-transform" />
+                          </>
+                        )}
+                      </span>
+                    </button>
+                  </form>
                 )}
-              </button>
-            </form>
+              </div>
+            </div>
           </div>
         </div>
       </div>

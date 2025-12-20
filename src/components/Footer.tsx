@@ -1,10 +1,33 @@
+import { useEffect, useState } from "react";
 import { personalInfo } from "../data/portfolioData";
+import myLogo from "../../public/dinushkatharidu.dev.jpg"
+import {
+  FaGithub,
+  FaLinkedin,
+  FaEnvelope,
+  FaArrowUp,
+  FaReact,
+} from "react-icons/fa";
+import { SiTailwindcss, SiTypescript } from "react-icons/si";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
-  const quickLinks = [
-    { name: "Home", href: "#home" },
+  // Handle Scroll Visibility for "Back to Top"
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const navLinks = [
     { name: "About", href: "#about" },
     { name: "Skills", href: "#skills" },
     { name: "Projects", href: "#projects" },
@@ -12,116 +35,148 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-[#0a0a0f] border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main Footer Content */}
-        <div className="py-12 grid md:grid-cols-3 gap-8 items-center">
-          {/* Logo & Description */}
-          <div className="text-center md:text-left">
-            <a href="#home" className="inline-flex items-center gap-2 group">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] flex items-center justify-center">
-                <span className="text-white font-bold">D</span>
-              </div>
-              <span className="text-xl font-bold text-white">
-                Dinushka<span className="text-[#6366f1]">.dev</span>
+    <footer className="relative bg-[#0a0a0f] pt-20 pb-10 overflow-hidden">
+      {/* 1. Advanced Gradient Top Border */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#6366f1]/50 to-transparent"></div>
+
+      {/* 2. Background Ambient Glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[200px] bg-[#6366f1]/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+          {/* Column 1: Branding & Status */}
+          <div className="md:col-span-5 space-y-6 text-center md:text-left">
+            <a href="#home" className="inline-flex items-center gap-3 group">
+              <img
+                src={myLogo}
+                alt="logo"
+                className="w-10 h-10 rounded-full object-cover transition-all duration-300 ease-in-out group-hover:w-20 group-hover:h-20"
+              />
+              <span className="text-2xl font-bold text-white tracking-tight">
+                DinushkaTharidu<span className="text-[#6366f1]">.dev</span>
               </span>
             </a>
-            <p className="text-gray-400 mt-3 text-sm">
-              Building digital experiences with passion and precision.
+            <p className="text-gray-400 max-w-sm leading-relaxed mx-auto md:mx-0">
+              Undergraduate Software Engineer focused on building scalable Java,
+              SpringBoot, MERN stack applications and mastering modern system
+              architectures.
             </p>
+
+            {/* Live Availability Status */}
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-emerald-500/5 border border-emerald-500/20">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span className="text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                Available for Internships
+              </span>
+            </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="flex justify-center gap-6">
-            {quickLinks.map((link, index) => (
-              <a
-                key={index}
-                href={link.href}
-                className="text-gray-400 hover:text-[#6366f1] transition-colors text-sm"
-              >
-                {link.name}
-              </a>
-            ))}
+          {/* Column 2: Navigation Grid */}
+          <div className="md:col-span-4 grid grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h4 className="text-white font-bold text-sm uppercase tracking-widest">
+                Navigation
+              </h4>
+              <ul className="space-y-3">
+                {navLinks.map((link) => (
+                  <li key={link.name}>
+                    <a
+                      href={link.href}
+                      className="text-gray-500 hover:text-white transition-colors text-sm flex items-center gap-2 group"
+                    >
+                      <span className="w-0 group-hover:w-2 h-[1px] bg-[#6366f1] transition-all duration-300"></span>
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="space-y-4">
+              <h4 className="text-white font-bold text-sm uppercase tracking-widest">
+                Connect
+              </h4>
+              <div className="flex flex-col gap-3">
+                <a
+                  href={personalInfo.linkedin}
+                  target="_blank"
+                  className="text-gray-500 hover:text-[#0077b5] transition-colors text-sm flex items-center gap-2"
+                >
+                  <FaLinkedin /> LinkedIn
+                </a>
+                <a
+                  href={personalInfo.github}
+                  target="_blank"
+                  className="text-gray-500 hover:text-white transition-colors text-sm flex items-center gap-2"
+                >
+                  <FaGithub /> GitHub
+                </a>
+                <a
+                  href={`mailto:${personalInfo.email}`}
+                  className="text-gray-500 hover:text-[#EA4335] transition-colors text-sm flex items-center gap-2"
+                >
+                  <FaEnvelope /> Email
+                </a>
+              </div>
+            </div>
           </div>
 
-          {/* Social Links */}
-          <div className="flex justify-center md:justify-end gap-4">
+          {/* Column 3: Newsletter/CTA */}
+          <div className="md:col-span-3 space-y-4 text-center md:text-left">
+            <h4 className="text-white font-bold text-sm uppercase tracking-widest">
+              Interested in working?
+            </h4>
+            <p className="text-gray-400 text-sm">
+              Open to discussing new projects or internship roles.
+            </p>
             <a
-              href={personalInfo.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 glass rounded-lg flex items-center justify-center text-gray-400 hover: text-white hover:bg-white/10 transition-all duration-300"
+              href="#contact"
+              className="inline-flex px-6 py-3 bg-white/5 border border-white/10 rounded-xl text-white text-sm font-semibold hover:bg-[#6366f1] hover:border-[#6366f1] transition-all duration-300"
             >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-. 015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-. 78-. 015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-. 78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-              </svg>
-            </a>
-            <a
-              href={personalInfo.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 glass rounded-lg flex items-center justify-center text-gray-400 hover:text-[#0077b5] hover:bg-[#0077b5]/10 transition-all duration-300"
-            >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-. 027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h. 046c.477-. 9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C. 792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h. 003z" />
-              </svg>
-            </a>
-            <a
-              href={`mailto:${personalInfo.email}`}
-              className="w-10 h-10 glass rounded-lg flex items-center justify-center text-gray-400 hover: text-red-400 hover:bg-red-400/10 transition-all duration-300"
-            >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-              </svg>
+              Get in touch
             </a>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="py-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-500 text-sm">
-            © {currentYear}{" "}
-            <span className="text-[#6366f1]">Dinushka Tharidu</span>. All rights
-            reserved.
-          </p>
-          <p className="text-gray-500 text-sm flex items-center gap-2">
-            Built with <span className="text-red-500">❤</span> using
-            <span className="text-[#61DAFB]">React</span> +
-            <span className="text-[#3178C6]">TypeScript</span> +
-            <span className="text-[#38BDF8]">Tailwind CSS</span>
-          </p>
+        {/* 3. Technology Stack Credits Bar */}
+        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex flex-wrap justify-center gap-4">
+            <span className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/5 text-gray-400 text-xs border border-white/5">
+              <FaReact className="text-[#61DAFB]" /> React
+            </span>
+            <span className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/5 text-gray-400 text-xs border border-white/5">
+              <SiTypescript className="text-[#3178C6]" /> TypeScript
+            </span>
+            <span className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/5 text-gray-400 text-xs border border-white/5">
+              <SiTailwindcss className="text-[#38BDF8]" /> Tailwind
+            </span>
+          </div>
+
+          <div className="text-center md:text-right">
+            <p className="text-gray-500 text-xs">
+              © {currentYear}{" "}
+              <span className="text-white font-medium">Dinushka Tharidu</span>.
+              Built with precision in{" "}
+              <span className="text-white">Sri Lanka 🇱🇰</span>
+            </p>
+          </div>
         </div>
       </div>
 
-      {/* Back to Top Button */}
-      <a
-        href="#home"
-        className="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] rounded-xl flex items-center justify-center text-white shadow-lg shadow-[#6366f1]/30 hover:scale-110 transition-transform duration-300 z-50"
+      {/* 4. Professional Back to Top Button */}
+      <button
+        onClick={scrollToTop}
+        className={`fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] rounded-2xl flex items-center justify-center text-white shadow-2xl shadow-[#6366f1]/40 transition-all duration-500 z-50 hover:-translate-y-2 group ${
+          showScrollTop
+            ? "translate-y-0 opacity-100"
+            : "translate-y-20 opacity-0 pointer-events-none"
+        }`}
       >
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M5 10l7-7m0 0l7 7m-7-7v18"
-          />
-        </svg>
-      </a>
+        <FaArrowUp className="text-xl group-hover:scale-110 transition-transform" />
+        <div className="absolute inset-0 rounded-2xl bg-white opacity-0 group-hover:opacity-10 transition-opacity"></div>
+      </button>
     </footer>
   );
 };
