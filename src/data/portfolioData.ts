@@ -159,7 +159,7 @@ export const education = [
     location: "Colombo",
     period: "11/2023 – Present",
     status: "In Progress",
-    icon: FaGraduationCap ,
+    icon: FaGraduationCap,
     color: "primary",
   },
   {
@@ -168,7 +168,7 @@ export const education = [
     certification: "Pearson Assured",
     period: "03/2023 – 03/2024",
     status: "Completed",
-    icon: FaLaptopCode ,
+    icon: FaLaptopCode,
     color: "secondary",
   },
   {
@@ -176,21 +176,31 @@ export const education = [
     institution: "ESOFT Metro Campus",
     period: "03/2023 – 03/2024",
     status: "Completed",
-    icon: FaBook ,
+    icon: FaBook,
     color: "accent",
   },
   {
     degree: "GCE Advanced Level – Mathematical Stream",
     institution: "Rahula National School, Godakawela",
-    period: "2022 – 2023",
+    period: "2019 – 2022",
     status: "Completed",
-    icon: FaSchool ,
+    icon: FaSchool,
     color: "green",
   },
 ];
 
 export const certifications = {
   tier1: [
+    {
+      name: "Software Engineer Intern (Role Certification)",
+      issuer: "HackerRank",
+      date: "2025",
+    },
+    {
+      name: "Rest API (Intermediate) Certificate",
+      issuer: "HackerRank",
+      date: "2025",
+    },
     {
       name: "Neo4j Graph Data Science Certification",
       issuer: "Neo4j",
