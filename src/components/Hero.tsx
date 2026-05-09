@@ -11,8 +11,9 @@ const Hero = () => {
   const roles = [
     "Intern Software Engineer",
     "Full Stack Developer",
-    "React Developer",
     "Java Developer",
+    "Laravel Developer",
+    "React Developer",
   ];
 
   useEffect(() => {

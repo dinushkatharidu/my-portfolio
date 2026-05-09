@@ -25,7 +25,7 @@ const About = () => {
   const highlights = [
     {
       icon: <FaGraduationCap className="text-blue-400" />,
-      text: "BSc Software Engineering",
+      text: "Bachelor of Software Engineering (Hons)",
     },
     {
       icon: <FaAward className="text-yellow-400" />,
